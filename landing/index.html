@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content-wrapper="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content-wrapper="ie=edge" />
+    <title>MY GAME</title>
+
+    <link rel="shortcut icon" href="./img/icon.ico" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="page-container">
+      <nav>
+        <div class="nav__wrapper">
+          <ul class="nav__menu">
+            <li class="nav__item"><a href="#Home">Home</a></li>
+            <li class="nav__item"><a href="#about">About</a></li>
+            <li class="nav__item"><a href="#screenshots">Screenshots</a></li>
+            <li class="nav__item"><a href="#contacts">Contacts</a></li>
+          </ul>
+          <a class="nav__item play-button" href="#">Play Now</a>
+        </div>
+      </nav>
+
+      <header>
+        <a name="Home"></a>
+
+        <div class="header__image"><!-- <img src="header.jpg" alt="header-image" /> --></div>
+        <div class="header__text"><h1>MY GAME</h1></div>
+      </header>
+
+      <main>
+        <a name="about"></a>
+
+        <section class="main__about" id="main__about">
+          <div class="main__about_wrapper">
+            <h2>About Game</h2>
+            <p>
+              <!--  -->
+              About MY GAME
+            </p>
+
+            <a name="screenshots"></a>
+          </div>
+        </section>
+
+        <section class="main__screenshots" id="main__screenshots">
+          <div class="main__screenshots_wrapper">
+            <h2>Screenshots</h2>
+
+            <div class="main__screenshots_slider">
+              <div class="prev-button" id="prev-button"> <i class="fas fa-angle-left fa-7x"></i> </div>
+
+              <img class="slide" src="./img/screenshots/1.png" alt="screenshot" />
+              <img class="slide" src="./img/screenshots/2.png" alt="screenshot" />
+              <img class="slide" src="./img/screenshots/3.png" alt="screenshot" />
+              <img class="slide" src="./img/screenshots/4.png" alt="screenshot" />
+              <img class="slide" src="./img/screenshots/5.png" alt="screenshot" />
+
+              <div class="next-button" id="next-button"> <i class="fas fa-angle-right fa-7x"></i> </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="main__contacts" id="main__contacts">
+          <a name="contacts"></a>
+
+          <div class="main__contacts_wrapper">
+            <h2>Contacts</h2>
+            <span>This game developed by Kuchma A.P.</span>
+            <span>The Rolling Scopes School student</span>
+            <span>Code of this game you can see on my GitHub repository</span>
+
+            <div class="main__contacts_person">
+              <p>© 2018 Copyright: <span>Anton Kuchma</span></p>
+            </div>
+            <div class="main__contacts_link">
+              <a href="https://github.com/ton9q"> <i class="fab fa-github fa-2x"></i> </a>
+              <a href="https://vk.com/ton9_q"> <i class="fab fa-vk fa-2x"></i> </a>
+              <a href="https://twitter.com/ton9__"> <i class="fab fa-twitter fa-2x"></i> </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <span><a href="https://github.com/ton9q">Anton Kuchma</a> 2018</span>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="./js/index.js"></script>
+  </body>
+</html>
