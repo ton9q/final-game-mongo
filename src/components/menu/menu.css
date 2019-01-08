@@ -1,0 +1,72 @@
+.menu .wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../../../assets/background1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  color: rgb(255, 255, 255);
+}
+
+.menu__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 80px;
+}
+
+.menu__item:hover {
+  cursor: pointer;
+  font-size: 100px;
+  font-weight: bold;
+}
+
+.menu__section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.menu__section h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.menu__section .menu__score_container {
+  height: 300px;
+  overflow: hidden;
+}
+
+.menu__section .menu__help_section p {
+  font-size: 26px;
+  /* height: 400px; */
+  /* width: 60%; */
+  overflow: hidden;
+}
+
+.menu__section .close-button {
+  margin-top: 20px;
+  font-size: 26px;
+  padding: 10px 30px;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(255, 255, 255, 0.7);
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+}
+
+.menu__section .close-button:hover {
+  color: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
+}
+
+.menu__section .close-button:active {
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
+}
