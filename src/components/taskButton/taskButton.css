@@ -1,0 +1,21 @@
+.task-button {
+  font-size: 26px;
+  padding: 5px 10px;
+  margin: 10px;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(0, 0, 0, 0.4);
+  outline: none;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+}
+
+.task-button:hover {
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.task-button:active {
+  color: rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+}
