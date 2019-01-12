@@ -1,0 +1,60 @@
+.battle .wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('../../../assets/background1.jpg');
+  background-size: contain;
+  /* background-repeat: no-repeat; */
+  height: 100vh;
+  width: 100vw;
+  color: rgb(255, 255, 255);
+}
+
+.battle__panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 90%;
+  margin: 20px 0;
+}
+
+.battle__panel .progress {
+  height: 20px;
+  width: 250px;
+  margin-top: 10px;
+  border: 2px solid rgb(255, 255, 255);
+}
+
+.battle__panel .progress .hero-hp,
+.battle__panel .progress .monster-hp {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: all 1s ease-in-out 0s;
+}
+
+.battle__panel .monster {
+  text-align: right;
+}
+
+.battle .button-choice-spell {
+  margin-top: 20px;
+  font-size: 26px;
+  padding: 10px 30px;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(255, 255, 255, 0.7);
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+}
+
+.battle .button-choice-spell:hover {
+  color: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
+}
+
+.battle .button-choice-spell:active {
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
+}
