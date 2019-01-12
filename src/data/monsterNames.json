@@ -1,0 +1,38 @@
+{
+  "names": [
+    "Ogre",
+    "Gnome",
+    "Elf",
+    "Giant",
+    "Troll",
+    "Zombie",
+    "Orc",
+    "Trent",
+    "Centaur",
+    "Knight"
+  ],
+  "surnames": [
+    "Vicious",
+    "Terrible",
+    "Huge",
+    "Smelly",
+    "Snotty",
+    "Fierce",
+    "Poisonous",
+    "Thorny",
+    "Toothy",
+    "Beautiful"
+  ],
+  "patronymics": [
+    "Petrovich",
+    "Antonovich",
+    "Maksimovish",
+    "Stanislavovich",
+    "Vladimirovich",
+    "Victorovich",
+    "Dmitrievich",
+    "Vladislavovich",
+    "Sergeevich",
+    "Leonidovich"
+  ]
+}
