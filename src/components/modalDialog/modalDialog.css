@@ -32,7 +32,48 @@
 }
 
 .modal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 400px;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
+}
+
+
+
+
+
+
+.info-about-battle {
+  padding: 50px;
+  font-size: 26px;
+}
+
+.end-button,
+.next-button {
+  font-size: 26px;
+  padding: 5px 10px;
+  margin: 10px;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(0, 0, 0, 0.4);
+  outline: none;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+}
+
+.end-button:hover,
+.next-button:hover {
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.end-button:active,
+.next-button:active {
+  color: rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(0, 0, 0, 0.1);
 }

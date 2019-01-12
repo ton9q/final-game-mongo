@@ -7,6 +7,9 @@ class ModalDialog {
   static draw() {
     $('body').append(template);
 
+    $('.modal-body .in-task').hide();
+    $('.modal-body .end-game').hide();
+
     const size = 400;
 
     $('#modal-dialog').css({

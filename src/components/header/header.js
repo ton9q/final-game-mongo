@@ -3,15 +3,20 @@ import $ from 'jquery';
 import template from './header.template';
 import './header.css';
 
-import menu from '../menu/menu';
-
 class Header {
   static draw() {
     $('.start-page').append(template);
+    $('.start-page').hide();
 
+    // show menu on click
     $('.start-page').click(function() {
-      $('.start-page').fadeOut(1500, menu.draw);
+      $('.start-page').hide();
+      $('.menu').fadeIn(1000);
     });
+  }
+
+  static show() {
+    $('.start-page').show();
   }
 }
 

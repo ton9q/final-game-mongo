@@ -34,9 +34,7 @@ input#person-name {
 .config__name input {
   padding: 5px 0;
   margin: 20px 0;
-}
 
-.config__name input {
   font-size: 26px;
   background-color: rgba(0, 0, 0, 0);
   border: 2px solid rgba(255, 255, 255, 0.7);
@@ -83,20 +81,13 @@ input#person-name {
   display: block;
   height: 100%;
   width: 100%;
-  /*  */
-  background-image: url('../../../assets/background/0.jpg');
-  background-image: url('../../../assets/background/1.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-size: contain;
+  /* background-repeat: no-repeat; */
 }
 
 .person-container {
   height: 100px;
   width: 100px;
-  /*  */
-  background-image: url('../../../assets/person/0.png');
-  background-image: url('../../../assets/person/1.png');
-  background-image: url('../../../assets/person/2.png');
   background-size: cover;
   background-repeat: no-repeat;
   position: absolute;
@@ -137,6 +128,7 @@ input#person-name {
 
 .wrapper-container {
   height: 140px;
+  max-width: 300px;
   display: flex;
   flex-wrap: wrap;
   overflow-y: scroll;
