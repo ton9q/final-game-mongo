@@ -5,9 +5,9 @@ import { pause } from '../utils/index';
 import CONFIG_LIST from '../utils/loadImages';
 
 class Hero {
-  constructor(game) {
-    this.health = 100;
-    this.damage = 25;
+  constructor(game, health, damage) {
+    this.health = health;
+    this.damage = damage;
 
     this.canvas = document.getElementById('canvas-hero');
     this.ctx = this.canvas.getContext('2d');
@@ -17,6 +17,13 @@ class Hero {
     this.heroNumber = Number($('#person-container').attr('data-battle'));
     this.delayFrame = 7;
 
+    this.animationType = 'stand';
+    this.currentLoopIndex = 0;
+    this.frameCount = 0;
+  }
+
+  newHero() {
+    this.heroNumber = Number($('#person-container').attr('data-battle'));
     this.animationType = 'stand';
     this.currentLoopIndex = 0;
     this.frameCount = 0;

@@ -2,9 +2,9 @@ import Hero from './hero';
 import Monster from './monster';
 
 class Game {
-  constructor() {
-    this.hero = new Hero(this);
-    this.monster = new Monster(this);
+  constructor(health, damage) {
+    this.hero = new Hero(this, health, damage);
+    this.monster = new Monster(this, health, damage);
     this.animation;
   }
 

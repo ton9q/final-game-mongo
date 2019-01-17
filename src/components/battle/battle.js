@@ -8,9 +8,18 @@ import TaskButton from '../taskButton/taskButton';
 import Task from '../task/task';
 
 import monsterNames from '../../data/monsterNames';
-import nameGenerate from '../../person/generateName';
+import generateName from '../../game/generateName';
+import Game from '../../game/game';
+
+import { pause } from '../../utils';
 
 import mathTask from '../../tasks/mathTask';
+
+let run = false;
+let game;
+
+const health = 100;
+const damage = 25;
 
 class Battle {
   static draw() {
@@ -46,11 +55,11 @@ class Battle {
       ModalDialog.close();
 
       if (result) {
-        console.log('damage opponent ANIMATION');
-        Battle.changeHp('monster-hp', 100);
+        game.hero.attack();
+        Battle.changeHp('monster-hp', damage);
       } else {
-        console.log('damage yourself ANIMATION');
-        Battle.changeHp('hero-hp', 100);
+        game.monster.attack();
+        Battle.changeHp('hero-hp', damage);
       }
 
       Battle.checkDeath();
@@ -58,16 +67,18 @@ class Battle {
 
     // onclick end button
     $('.end-button').click(function() {
-      console.log(
-        'End game and SAVE RESULTS to score may be 2 parametrs: series and almost result'
-      );
+      if (ModalDialog.getCountNumberMonsters() !== 0) {
+        console.log(
+          'End game and SAVE RESULTS to score may be 2 parametrs: series and almost result'
+        );
+      }
 
       $('.battle').hide();
       $('.menu').fadeIn(1000);
 
       Battle.clearInputName();
-      Battle.hp100('hero-hp');
-      Battle.hp100('monster-hp');
+      Battle.changeHpOnFull('hero-hp');
+      Battle.changeHpOnFull('monster-hp');
 
       $('.modal-body .tasks').fadeIn(1000);
       $('.modal-body .in-task').hide();
@@ -78,15 +89,30 @@ class Battle {
 
     // onclick next button - new monster
     $('.next-button').click(function() {
-      console.log('Generate NEW MONSTER');
+      game.monster.newMonster();
+
+      $('.modal-body .tasks').fadeIn(1000);
+      $('.modal-body .in-task').hide();
+      $('.modal-body .end-game').hide();
 
       ModalDialog.close();
-      Battle.hp100('monster-hp');
-      $('#monster-name').text(nameGenerate(monsterNames));
+      Battle.changeHpOnFull('monster-hp');
+      $('#monster-name').text(generateName(monsterNames));
     });
   }
 
   static init() {
+    if (!run) {
+      run = true;
+      game = new Game(health, damage);
+      game.animate();
+
+      // onclick choice-spell button
+      $('.battle .button-choice-spell').click(function() {
+        ModalDialog.open();
+      });
+    }
+
     // change background
     $('.battle .wrapper').css({
       'background-image': `${$('.background-container').css('background-image')}`,
@@ -94,13 +120,11 @@ class Battle {
 
     // change controll panel (names)
     $('#hero-name').text(`${$('#person-name').val()}`);
-    $('#monster-name').text(nameGenerate(monsterNames));
-    console.log('GENERATE MOSTER BODY');
-    $('#text-center').text('vs');
+    $('#monster-name').text(generateName(monsterNames));
 
-    $('.battle .button-choice-spell').click(function() {
-      ModalDialog.open();
-    });
+    // generate new characters
+    game.hero.newHero();
+    game.monster.newMonster();
   }
 
   static changeHp(classForChange, changeValueInPersents) {
@@ -126,7 +150,7 @@ class Battle {
     });
   }
 
-  static hp100(classForChange) {
+  static changeHpOnFull(classForChange) {
     const color = 'rgba(255, 255, 255, 0.5)';
     $(`.battle__panel .${classForChange}`).css({
       width: '100%',
@@ -134,14 +158,18 @@ class Battle {
     });
   }
 
-  static checkDeath() {
+  static async checkDeath() {
     let death = false;
+
+    await pause(2000); // pause - because we wait animation finish (hp)
 
     if (parseInt($('.battle__panel .hero-hp').css('width')) === 0) {
       death = true;
+      ModalDialog.zeroCountNumberMonsters();
       $('.modal-body .end-game .next-button').hide();
     } else if (parseInt($('.battle__panel .monster-hp').css('width')) === 0) {
       death = true;
+      ModalDialog.addToCountNumberMonsters();
       $('.modal-body .end-game .next-button').show();
     }
 

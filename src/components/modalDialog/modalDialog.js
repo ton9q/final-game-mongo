@@ -38,6 +38,18 @@ class ModalDialog {
       $('#modal-dialog-overlay').fadeOut(400);
     });
   }
+
+  static addToCountNumberMonsters() {
+    $('#number-monsters').text(Number($('#number-monsters').text()) + 1);
+  }
+
+  static zeroCountNumberMonsters() {
+    $('#number-monsters').text(0);
+  }
+
+  static getCountNumberMonsters() {
+    return Number($('#number-monsters').text());
+  }
 }
 
 export default ModalDialog;

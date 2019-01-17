@@ -1,14 +1,13 @@
 import $ from 'jquery';
 
 import { pause } from '../utils/index';
-import generateName from './generateName';
 
 import CONFIG_LIST from '../utils/loadImages';
 
 class Monster {
-  constructor(game) {
-    this.health = 100;
-    this.damage = 25;
+  constructor(game, health, damage) {
+    this.health = health;
+    this.damage = damage;
 
     this.canvas = document.getElementById('canvas-monster');
     this.ctx = this.canvas.getContext('2d');
@@ -18,6 +17,13 @@ class Monster {
     this.monsterNumber = Math.floor(Math.random() * CONFIG_LIST.sprites.monsters.length);
     this.delayFrame = 5;
 
+    this.animationType = 'stand';
+    this.currentLoopIndex = 0;
+    this.frameCount = 0;
+  }
+
+  newMonster() {
+    this.monsterNumber = Math.floor(Math.random() * CONFIG_LIST.sprites.monsters.length);
     this.animationType = 'stand';
     this.currentLoopIndex = 0;
     this.frameCount = 0;
@@ -104,7 +110,7 @@ class Monster {
         if (this.game.hero.health <= 0) {
           this.game.hero.animationType = 'die';
         } else {
-          this.game.hero.animationType = 'die';
+          this.game.hero.animationType = 'hurt';
         }
       }
     );

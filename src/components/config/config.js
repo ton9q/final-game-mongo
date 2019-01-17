@@ -34,12 +34,12 @@ class Config {
   static drawContainers() {
     for (let i = 0; i < CONFIG_LIST.backgrounds.length; i++) {
       Config.createAndAppendTemplateConfigItem('background', i);
-      Config.changeCssConfigItem('background', i);
+      Config.changeCssConfigItem('background', 'backgrounds', i);
     }
 
-    for (let i = 0; i < CONFIG_LIST.persons.length; i++) {
+    for (let i = 0; i < CONFIG_LIST.heroes.length; i++) {
       Config.createAndAppendTemplateConfigItem('person', i);
-      Config.changeCssConfigItem('person', i);
+      Config.changeCssConfigItem('person', 'heroes', i);
     }
 
     $('.backgrounds .config-item').click(function() {
@@ -53,18 +53,18 @@ class Config {
     Config.addDefaultPreviewConfigItems();
   }
 
-  static changeCssConfigItem(configItem, index) {
+  static changeCssConfigItem(configItem, configItemImage, index) {
     const sizeImage = 58;
 
     $(`#${configItem}-${index}`).css({
-      'background-image': `url(${CONFIG_LIST[`${configItem}s`][index]})`,
+      'background-image': `url(${CONFIG_LIST[configItemImage][index]})`,
       height: `${sizeImage}px`,
       width: `${sizeImage}px`,
       margin: '5px',
       'border-radius': '15%',
       border: '1px solid rgba(255, 255, 255, 0.7)',
       cursor: 'pointer',
-      'background-size': 'cover',
+      'background-size': `${configItem === 'person' ? 'contain' : 'cover'}`,
       'background-repeat': 'no-repeat',
     });
   }
@@ -89,6 +89,10 @@ class Config {
     $(`.${configItem}-container`).css({
       'background-image': `${$(thisConfigItem).css('background-image')}`,
     });
+
+    const idThisConfigItem = $(thisConfigItem).attr('id').split('-')[1];
+
+    $(`.${configItem}-container`).attr('data-battle', idThisConfigItem)
   }
 
   static addDefaultPreviewConfigItems() {

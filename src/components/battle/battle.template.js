@@ -20,8 +20,9 @@ export default `
     </div>
   </div>
 
-  <div class="battle__game game-canvas" id="game-canvas">
-  
+  <div class="battle__game game-canvas-container" id="game-canvas-container">
+    <canvas id="canvas-hero"></canvas>
+    <canvas id="canvas-monster"></canvas>
   </div>
 
   <div class="battle__for-attack">

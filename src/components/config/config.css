@@ -81,18 +81,19 @@ input#person-name {
   display: block;
   height: 100%;
   width: 100%;
-  background-size: contain;
-  /* background-repeat: no-repeat; */
+  background-size: 100% 100%;
+  transition: all 0.8s ease-in-out 0s;
 }
 
 .person-container {
-  height: 100px;
-  width: 100px;
-  background-size: cover;
+  height: 250px;
+  width: 250px;
+  background-size: contain;
   background-repeat: no-repeat;
   position: absolute;
-  left: 25%;
-  top: 25%;
+  left: 35%;
+  top: 15%;
+  transition: all 0.5s ease 0s;
 }
 
 .choose-info {
