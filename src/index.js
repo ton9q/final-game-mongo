@@ -8,13 +8,9 @@ import Menu from './components/menu/menu';
 import Config from './components/config/config';
 import Battle from './components/battle/battle';
 
+import { addFavicon } from './utils/index';
 
-function addFavicon(src) {
-  const link = document.createElement('link');
-  link.rel = 'shortcut icon';
-  link.href = src;
-  $('head').append(link);
-}
+import icon from '../assets/icon.ico';
 
 const starterTemplate = `
 <main role="main" class="container">
@@ -29,7 +25,7 @@ const starterTemplate = `
 $(document).ready(function() {
   window.$ = $; // for debug
 
-  addFavicon('../assets/icon.ico');
+  addFavicon(icon);
 
   $('body').append(starterTemplate);
   
@@ -40,6 +36,4 @@ $(document).ready(function() {
   Battle.draw();
 
   Header.show();
-  // Battle.init();
-  // $('.battle').show()
 });
