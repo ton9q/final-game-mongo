@@ -1,4 +1,4 @@
-import capitals from '../data/capitals';
+import capitals from '../../data/capitals';
 
 class CapitalsTask {
   constructor() {

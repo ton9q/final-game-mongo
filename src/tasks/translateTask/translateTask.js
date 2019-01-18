@@ -1,4 +1,4 @@
-import vocabulary from '../data/vocabulary';
+import vocabulary from '../../data/vocabulary';
 
 class TranslateTask {
   constructor() {

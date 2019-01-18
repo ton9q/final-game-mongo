@@ -1,4 +1,4 @@
-import months from '../data/months';
+import months from '../../data/months';
 
 class monthsTask {
   constructor() {

@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-import vocabulary from '../data/vocabulary';
+import vocabulary from '../../data/vocabulary';
 
 class ListeningTask {
   constructor() {

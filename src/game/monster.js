@@ -70,7 +70,7 @@ class Monster {
         this.jumpAnimation();
         break;
       default:
-        console.log('nothing animation');
+        console.log('nothing animation'); // eslint-disable-line
     }
   }
 
