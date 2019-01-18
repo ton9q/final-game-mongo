@@ -1,4 +1,4 @@
-let slideIndex = 1;
+let slideIndex = 0;
 
 function showSlides(n) {
   let i;
