@@ -8,7 +8,7 @@ import Menu from './components/menu/menu';
 import Config from './components/config/config';
 import Battle from './components/battle/battle';
 
-import { addFavicon } from './utils/index';
+import { addFavicon, sound as Sound } from './utils/index';
 
 import icon from '../assets/icon.ico';
 
@@ -28,7 +28,9 @@ $(document).ready(function() {
   addFavicon(icon);
 
   $('body').append(starterTemplate);
-  
+
+  const sound = new Sound('./sounds/default.mp3');
+
   ModalDialog.draw();
   Header.draw();
   Menu.draw();
