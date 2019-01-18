@@ -4,7 +4,9 @@
     "eslint:recommended"
   ],
   "env": {
-    "browser": true
+    "browser": true,
+    "jquery": true,
+    "jest": true
   },
   "rules": {
     "linebreak-style": 0

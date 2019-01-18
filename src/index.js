@@ -30,6 +30,15 @@ $(document).ready(function() {
   $('body').append(starterTemplate);
 
   const sound = new Sound('./sounds/default.mp3');
+  $('body').append(sound.templateButton);
+
+  $('.sound-switcher').click(function() {
+    if (sound.checkMusicPlay) {
+      sound.stop();
+    } else {
+      sound.play();
+    }
+  });
 
   ModalDialog.draw();
   Header.draw();

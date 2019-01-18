@@ -13,12 +13,13 @@ import Game from '../../game/game';
 
 import { pause } from '../../utils';
 
-import mathTask from '../../tasks/mathTask';
-import capitalsTask from '../../tasks/capitalsTask';
-import translateTask from '../../tasks/translateTask';
-import listeningTask from '../../tasks/listeningTask';
-import monthsTask from '../../tasks/monthsTask';
-import compareNumbersTask from '../../tasks/compareNumbersTask';
+import mathTask from '../../tasks/mathTask/mathTask';
+import capitalsTask from '../../tasks/capitalsTask/capitalsTask';
+import translateTask from '../../tasks/translateTask/translateTask';
+import listeningTask from '../../tasks/listeningTask/listeningTask';
+import monthsTask from '../../tasks/monthsTask/monthsTask';
+import compareNumbersTask from '../../tasks/compareNumbersTask/compareNumbersTask';
+import flagsTask from '../../tasks/flagsTask/flagsTask';
 
 let run = false;
 let game;
@@ -38,6 +39,7 @@ class Battle {
     TaskButton.draw('Listening');
     TaskButton.draw('Months');
     TaskButton.draw('Compare numbers');
+    TaskButton.draw('Flags');
 
     Task.draw();
 
@@ -107,6 +109,17 @@ class Battle {
       compareNumbersTask.init();
       $('.in-task .content-question').append(compareNumbersTask.templateQuestion());
       trueResult = compareNumbersTask.result;
+    });
+
+    $('.task-button.Flags').click(function() {
+      $('.modal-body .tasks').hide();
+      $('.modal-body .in-task').fadeIn(1000);
+
+      $('.in-task .content-question').empty();
+
+      flagsTask.init();
+      $('.in-task .content-question').append(flagsTask.templateQuestion());
+      trueResult = flagsTask.result;
     });
 
     // onclick answer button

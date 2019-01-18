@@ -20,3 +20,26 @@
   background: rgb(255, 255, 255);
   box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.5);
 }
+
+/* Sound block */
+
+.sound-switcher {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+}
+
+.sound-switcher:hover {
+  color: rgb(255, 255, 255);
+}
+
+.sound-switcher:active {
+  color: rgb(0, 0, 0);
+}
+
+.none {
+  display: none;
+}
