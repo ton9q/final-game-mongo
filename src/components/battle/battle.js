@@ -14,9 +14,15 @@ import Game from '../../game/game';
 import { pause } from '../../utils';
 
 import mathTask from '../../tasks/mathTask';
+import capitalsTask from '../../tasks/capitalsTask';
+import translateTask from '../../tasks/translateTask';
+import listeningTask from '../../tasks/listeningTask';
+import monthsTask from '../../tasks/monthsTask';
+import compareNumbersTask from '../../tasks/compareNumbersTask';
 
 let run = false;
 let game;
+let trueResult;
 
 const health = 100;
 const damage = 25;
@@ -26,14 +32,17 @@ class Battle {
     $('.battle').append(template);
     $('.battle').hide();
 
-    TaskButton.draw('Math Task');
+    TaskButton.draw('Math');
+    TaskButton.draw('Capitals');
     TaskButton.draw('Translation');
-    TaskButton.draw('Compound Words');
+    TaskButton.draw('Listening');
+    TaskButton.draw('Months');
+    TaskButton.draw('Compare numbers');
 
     Task.draw();
 
     // onclick Math task
-    $('.task-button.Math-Task').click(function() {
+    $('.task-button.Math').click(function() {
       $('.modal-body .tasks').hide();
       $('.modal-body .in-task').fadeIn(1000);
 
@@ -41,11 +50,68 @@ class Battle {
 
       mathTask.init();
       $('.in-task .content-question').append(mathTask.templateQuestion());
+      trueResult = mathTask.result;
+    });
+
+    // onclick Capitals task
+    $('.task-button.Capitals').click(function() {
+      $('.modal-body .tasks').hide();
+      $('.modal-body .in-task').fadeIn(1000);
+
+      $('.in-task .content-question').empty();
+
+      capitalsTask.init();
+      $('.in-task .content-question').append(capitalsTask.templateQuestion());
+      trueResult = capitalsTask.result;
+    });
+
+    $('.task-button.Translation').click(function() {
+      $('.modal-body .tasks').hide();
+      $('.modal-body .in-task').fadeIn(1000);
+
+      $('.in-task .content-question').empty();
+
+      translateTask.init();
+      $('.in-task .content-question').append(translateTask.templateQuestion());
+      trueResult = translateTask.result;
+    });
+
+    $('.task-button.Listening').click(function() {
+      $('.modal-body .tasks').hide();
+      $('.modal-body .in-task').fadeIn(1000);
+
+      $('.in-task .content-question').empty();
+
+      $('.in-task .content-question').append(listeningTask.templateQuestion());
+      listeningTask.init();
+      trueResult = listeningTask.result;
+    });
+
+    $('.task-button.Months').click(function() {
+      $('.modal-body .tasks').hide();
+      $('.modal-body .in-task').fadeIn(1000);
+
+      $('.in-task .content-question').empty();
+
+      monthsTask.init();
+      $('.in-task .content-question').append(monthsTask.templateQuestion());
+      trueResult = monthsTask.result;
+    });
+
+    $('.task-button.Compare-numbers').click(function() {
+      $('.modal-body .tasks').hide();
+      $('.modal-body .in-task').fadeIn(1000);
+
+      $('.in-task .content-question').empty();
+
+      compareNumbersTask.init();
+      $('.in-task .content-question').append(compareNumbersTask.templateQuestion());
+      trueResult = compareNumbersTask.result;
     });
 
     // onclick answer button
     $('.answer-button').click(function() {
-      const result = mathTask.checkResult(Number($('input#answer').val()));
+      const result = trueResult == $('input#answer').val();
 
       Task.clearInputAnswer();
       // console.log(result);
@@ -85,11 +151,13 @@ class Battle {
       $('.modal-body .end-game').hide();
 
       ModalDialog.close();
+      ModalDialog.zeroCountNumberMonsters();
     });
 
     // onclick next button - new monster
     $('.next-button').click(function() {
       game.monster.newMonster();
+      game.hero.newHero();
 
       $('.modal-body .tasks').fadeIn(1000);
       $('.modal-body .in-task').hide();
@@ -165,7 +233,7 @@ class Battle {
 
     if (parseInt($('.battle__panel .hero-hp').css('width')) === 0) {
       death = true;
-      ModalDialog.zeroCountNumberMonsters();
+      ModalDialog.getCountNumberMonsters();
       $('.modal-body .end-game .next-button').hide();
     } else if (parseInt($('.battle__panel .monster-hp').css('width')) === 0) {
       death = true;

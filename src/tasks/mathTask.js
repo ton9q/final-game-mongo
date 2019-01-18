@@ -46,12 +46,6 @@ class MathTask {
     this.expression = `${this.firstNumber} ${operation} ${this.secondNumber}`;
   }
 
-  checkResult(answer) {
-    if (this.result === answer) {
-      return true;
-    } else return false;
-  }
-
   templateQuestion() {
     const template = `
       <div class="expression">
