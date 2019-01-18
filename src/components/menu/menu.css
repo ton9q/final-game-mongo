@@ -71,3 +71,30 @@
   color: rgb(0, 0, 0);
   border: 2px solid rgb(0, 0, 0);
 }
+
+.menu__section.menu__score_section .score-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu__section.menu__score_section .menu__score_container {
+  padding: 5px;
+  height: 310px;
+  overflow-y: scroll;
+}
+
+.menu__section.menu__score_section .name,
+.menu__section.menu__score_section .score-in-game {
+  padding: 10px 30px;
+  text-align: center;
+  width: 300px;
+  font-size: 26px;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.menu__section.menu__score_section .score-in-game {
+  padding: 10px;
+  width: 100px;
+}

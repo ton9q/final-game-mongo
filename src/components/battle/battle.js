@@ -10,16 +10,17 @@ import Task from '../task/task';
 import monsterNames from '../../data/monsterNames';
 import generateName from '../../game/generateName';
 import Game from '../../game/game';
+import Score from '../../game/score';
 
 import { pause } from '../../utils';
 
-import mathTask from '../../tasks/mathTask/mathTask';
 import capitalsTask from '../../tasks/capitalsTask/capitalsTask';
-import translateTask from '../../tasks/translateTask/translateTask';
-import listeningTask from '../../tasks/listeningTask/listeningTask';
-import monthsTask from '../../tasks/monthsTask/monthsTask';
 import compareNumbersTask from '../../tasks/compareNumbersTask/compareNumbersTask';
 import flagsTask from '../../tasks/flagsTask/flagsTask';
+import listeningTask from '../../tasks/listeningTask/listeningTask';
+import mathTask from '../../tasks/mathTask/mathTask';
+import monthsTask from '../../tasks/monthsTask/monthsTask';
+import translateTask from '../../tasks/translateTask/translateTask';
 
 let run = false;
 let game;
@@ -33,123 +34,17 @@ class Battle {
     $('.battle').append(template);
     $('.battle').hide();
 
-    TaskButton.draw('Math');
-    TaskButton.draw('Capitals');
-    TaskButton.draw('Translation');
-    TaskButton.draw('Listening');
-    TaskButton.draw('Months');
-    TaskButton.draw('Compare numbers');
-    TaskButton.draw('Flags');
-
     Task.draw();
+    Battle.addTaskButtons();
 
-    // onclick Math task
-    $('.task-button.Math').click(function() {
-      $('.modal-body .tasks').hide();
-      $('.modal-body .in-task').fadeIn(1000);
-
-      $('.in-task .content-question').empty();
-
-      mathTask.init();
-      $('.in-task .content-question').append(mathTask.templateQuestion());
-      trueResult = mathTask.result;
-    });
-
-    // onclick Capitals task
-    $('.task-button.Capitals').click(function() {
-      $('.modal-body .tasks').hide();
-      $('.modal-body .in-task').fadeIn(1000);
-
-      $('.in-task .content-question').empty();
-
-      capitalsTask.init();
-      $('.in-task .content-question').append(capitalsTask.templateQuestion());
-      trueResult = capitalsTask.result;
-    });
-
-    $('.task-button.Translation').click(function() {
-      $('.modal-body .tasks').hide();
-      $('.modal-body .in-task').fadeIn(1000);
-
-      $('.in-task .content-question').empty();
-
-      translateTask.init();
-      $('.in-task .content-question').append(translateTask.templateQuestion());
-      trueResult = translateTask.result;
-    });
-
-    $('.task-button.Listening').click(function() {
-      $('.modal-body .tasks').hide();
-      $('.modal-body .in-task').fadeIn(1000);
-
-      $('.in-task .content-question').empty();
-
-      $('.in-task .content-question').append(listeningTask.templateQuestion());
-      listeningTask.init();
-      trueResult = listeningTask.result;
-    });
-
-    $('.task-button.Months').click(function() {
-      $('.modal-body .tasks').hide();
-      $('.modal-body .in-task').fadeIn(1000);
-
-      $('.in-task .content-question').empty();
-
-      monthsTask.init();
-      $('.in-task .content-question').append(monthsTask.templateQuestion());
-      trueResult = monthsTask.result;
-    });
-
-    $('.task-button.Compare-numbers').click(function() {
-      $('.modal-body .tasks').hide();
-      $('.modal-body .in-task').fadeIn(1000);
-
-      $('.in-task .content-question').empty();
-
-      compareNumbersTask.init();
-      $('.in-task .content-question').append(compareNumbersTask.templateQuestion());
-      trueResult = compareNumbersTask.result;
-    });
-
-    $('.task-button.Flags').click(function() {
-      $('.modal-body .tasks').hide();
-      $('.modal-body .in-task').fadeIn(1000);
-
-      $('.in-task .content-question').empty();
-
-      flagsTask.init();
-      $('.in-task .content-question').append(flagsTask.templateQuestion());
-      trueResult = flagsTask.result;
-    });
-
-    // onclick answer button
-    $('.answer-button').click(function() {
-      const result = trueResult == $('input#answer').val();
-
-      Task.clearInputAnswer();
-      // console.log(result);
-
-      $('.modal-body .in-task').hide();
-      $('.modal-body .tasks').fadeIn(1000);
-      ModalDialog.close();
-
-      if (result) {
-        game.hero.attack();
-        Battle.changeHp('monster-hp', damage);
-      } else {
-        game.monster.attack();
-        Battle.changeHp('hero-hp', damage);
-      }
-
-      Battle.checkDeath();
-    });
+    Score.addToScore('ton9q', 10);
+    Score.addToScore('bot', 1);
+    Score.addToScore('maksim', 5);
 
     // onclick end button
     $('.end-button').click(function() {
       if (ModalDialog.getCountNumberMonsters() !== 0) {
-        console.log(
-          'End game and SAVE RESULTS to score may be 2 parametrs: series and almost result'
-        );
+        Score.addToScore($('#hero-name').text(), ModalDialog.getCountNumberMonsters());
       }
 
       $('.battle').hide();
@@ -264,6 +159,126 @@ class Battle {
 
   static clearInputName() {
     $('input#person-name').val('');
+  }
+
+  static onOpenTask() {
+    $('.modal-body .tasks').hide();
+    $('.modal-body .in-task').fadeIn(1000);
+
+    $('.in-task .content-question').empty();
+  }
+
+  static checkResult(answer) {
+    let result = false;
+    answer = answer.toLowerCase();
+
+    if (Array.isArray(trueResult)) {
+      trueResult.forEach(item => {
+        item = item.toLowerCase();
+        if (answer == item) result = true;
+      });
+    } else {
+      if (answer == trueResult) result = true;
+    }
+
+    return result;
+  }
+
+  static addTaskButtons() {
+    TaskButton.draw('Math');
+    TaskButton.draw('Capitals');
+    TaskButton.draw('Translation');
+    TaskButton.draw('Listening');
+    TaskButton.draw('Months');
+    TaskButton.draw('Compare numbers');
+    TaskButton.draw('Flags');
+
+    // onclick Math task
+    $('.task-button.Math').click(function() {
+      Battle.onOpenTask();
+
+      mathTask.init();
+      $('.in-task .content-question').append(mathTask.templateQuestion());
+      trueResult = mathTask.result;
+    });
+
+    // onclick Capitals task
+    $('.task-button.Capitals').click(function() {
+      Battle.onOpenTask();
+
+      capitalsTask.init();
+      $('.in-task .content-question').append(capitalsTask.templateQuestion());
+      trueResult = capitalsTask.result;
+    });
+
+    // onclick Translation task
+    $('.task-button.Translation').click(function() {
+      Battle.onOpenTask();
+
+      translateTask.init();
+      $('.in-task .content-question').append(translateTask.templateQuestion());
+      trueResult = translateTask.result;
+    });
+
+    // onclick Listening task
+    $('.task-button.Listening').click(function() {
+      $('.modal-body .tasks').hide();
+      $('.modal-body .in-task').fadeIn(1000);
+
+      $('.in-task .content-question').empty();
+
+      $('.in-task .content-question').append(listeningTask.templateQuestion());
+      listeningTask.init();
+      trueResult = listeningTask.result;
+    });
+
+    // onclick Months task
+    $('.task-button.Months').click(function() {
+      Battle.onOpenTask();
+
+      monthsTask.init();
+      $('.in-task .content-question').append(monthsTask.templateQuestion());
+      trueResult = monthsTask.result;
+    });
+
+    // onclick Compare-numbers task
+    $('.task-button.Compare-numbers').click(function() {
+      Battle.onOpenTask();
+
+      compareNumbersTask.init();
+      $('.in-task .content-question').append(compareNumbersTask.templateQuestion());
+      trueResult = compareNumbersTask.result;
+    });
+
+    // onclick Flags task
+    $('.task-button.Flags').click(function() {
+      Battle.onOpenTask();
+
+      flagsTask.init();
+      $('.in-task .content-question').append(flagsTask.templateQuestion());
+      trueResult = flagsTask.result;
+    });
+
+    // onclick answer button
+    $('.answer-button').click(function() {
+      const result = Battle.checkResult($('input#answer').val());
+
+      Task.clearInputAnswer();
+
+      $('.modal-body .in-task').hide();
+      $('.modal-body .tasks').fadeIn(1000);
+      ModalDialog.close();
+
+      if (result) {
+        game.hero.attack();
+        Battle.changeHp('monster-hp', damage);
+      } else {
+        game.monster.attack();
+        Battle.changeHp('hero-hp', damage);
+      }
+
+      Battle.checkDeath();
+    });
   }
 }
 

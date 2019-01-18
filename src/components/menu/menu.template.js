@@ -8,7 +8,7 @@ export default `
   
   <article class="menu__section menu__score_section" id="menu__score_section">
     <h2>Top results</h2>
-    <div class="menu__score_container" id="menu__score_container">RESULTS</div>
+    <div class="menu__score_container" id="menu__score_container"></div>
     <button class="button close-button">
       <i class="fas fa-chevron-left"></i>
       Close
