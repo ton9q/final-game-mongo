@@ -6,6 +6,13 @@ import CONFIG_LIST from '../utils/loadImages';
 
 class Monster {
   constructor(game, health, damage) {
+    if (typeof health  === 'undefined') {
+      health = 100;
+    }
+    if (typeof damage  === 'undefined') {
+      damage = 25;
+    }
+
     this.health = health;
     this.damage = damage;
 
@@ -22,11 +29,24 @@ class Monster {
     this.frameCount = 0;
   }
 
-  newMonster() {
+  newMonster(health, damage) {
+    if (typeof health  === 'undefined') {
+      health = 100;
+    }
+    if (typeof damage  === 'undefined') {
+      damage = 25;
+    }
+
     this.monsterNumber = Math.floor(Math.random() * CONFIG_LIST.sprites.monsters.length);
     this.animationType = 'stand';
     this.currentLoopIndex = 0;
     this.frameCount = 0;
+    this.health = health;
+    this.damage = damage;
+    
+    $('#canvas-monster').css({
+      right: '0%'
+    });
   }
 
   animate() {

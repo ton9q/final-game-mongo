@@ -93,7 +93,7 @@ input#person-name {
   position: absolute;
   left: 35%;
   top: 15%;
-  transition: all 0.5s ease 0s;
+  transition: all 0.1s ease 0s;
 }
 
 .choose-info {

@@ -6,6 +6,13 @@ import CONFIG_LIST from '../utils/loadImages';
 
 class Hero {
   constructor(game, health, damage) {
+    if (typeof health  === 'undefined') {
+      health = 100;
+    }
+    if (typeof damage  === 'undefined') {
+      damage = 25;
+    }
+
     this.health = health;
     this.damage = damage;
 
@@ -22,11 +29,24 @@ class Hero {
     this.frameCount = 0;
   }
 
-  newHero() {
+  newHero(health, damage) {
+    if (typeof health  === 'undefined') {
+      health = 100;
+    }
+    if (typeof damage  === 'undefined') {
+      damage = 25;
+    }
+
     this.heroNumber = Number($('#person-container').attr('data-battle'));
     this.animationType = 'stand';
     this.currentLoopIndex = 0;
     this.frameCount = 0;
+    this.health = health;
+    this.damage = damage;
+    
+    $('#canvas-hero').css({
+      left: '5%'
+    });
   }
 
   animate() {

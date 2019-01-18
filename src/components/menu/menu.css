@@ -42,11 +42,12 @@
   overflow: hidden;
 }
 
-.menu__section .menu__help_section p {
+.menu__section.menu__help_section p {
   font-size: 26px;
-  /* height: 400px; */
-  /* width: 60%; */
+  height: 200px;
+  width: 60%;
   overflow: hidden;
+  text-align: center;
 }
 
 .menu__section .close-button {
