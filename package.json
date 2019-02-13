@@ -7,7 +7,9 @@
     "test": "jest",
     "lint": "eslint --ext .js src/",
     "build": "webpack --mode production",
-    "dev": "webpack --mode development && webpack-dev-server --mode development --open"
+    "buildDev": "webpack --mode development",
+    "dev": "webpack --mode development && webpack-dev-server --mode development --open",
+    "start": "nodemon server/app.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
+    "body-parser": "^1.18.3",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^2.0.2",
     "eslint": "^5.11.0",
@@ -37,7 +40,9 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
-    "jquery": "^3.3.1"
+    "express": "^4.16.4",
+    "jquery": "^3.3.1",
+    "mongoose": "^5.4.4"
   },
   "jest": {
     "moduleNameMapper": {
