@@ -1,3 +1,5 @@
+import { getUsers, addUser, updateUser } from './api-user';
+
 class Score {
   static scoreItem(name, score) {
     const scoreItemTemplate = `
@@ -10,43 +12,40 @@ class Score {
     return scoreItemTemplate;
   }
 
-  static domArrayToArray(domArray) {
-    const newArray = [];
-    for (let i = 0; i < domArray.length; i++) {
-      newArray.push(domArray[i].innerHTML);
-    }
+  static async update() {
+    $(`.menu__score_container`).empty();
 
-    return newArray;
+    const users = await getUsers();
+    const usersTemplates = [];
+
+    users.map(user => usersTemplates.push(Score.scoreItem(user.name, user.score)));
+
+    usersTemplates.map(user => $(`.menu__score_container`).append(user));
   }
 
-  static addToScore(name, score) {
-    const names = Score.domArrayToArray($('.menu__score_container .name'));
-    const scores = Score.domArrayToArray($('.menu__score_container .score-in-game'));
+  static async addUser(name, score) {
+    const users = await getUsers();
+    let newUser = true;
 
-    if (names.indexOf(name) === -1) {
-      const template = Score.scoreItem(name, score);
-      let position = 0;
+    users.map(user => {
+      if (user.name === name) newUser = false;
+    });
 
-      let elementAdd = false;
+    const user = {
+      name: name,
+      score: score
+    };
 
-      for (let i = 0; i < scores.length; i++) {
-        if (score > Number(scores[i])) {
-          position = i;
-          elementAdd = true;
-          break;
-        }
-      }
-
-      if (!elementAdd) {
-        $(`.menu__score_container`).append(template);
-      } else {
-        $(`.menu__score_container .score-item:eq(${position})`).before(template);
-      }
+    if (newUser) {
+      await addUser(user);
     } else {
-      const indexItem = names.indexOf(name);
-      const scoreNow = Number(scores[indexItem]);
-      $(`.menu__score_container .score-item:eq(${indexItem})`).remove();
-      Score.addToScore(name, scoreNow + score);
+      let userScore = 0;
+
+      users.map(user => {
+        if (user.name === name) userScore = user.score;
+      });
+
+      await updateUser({ ...user, score: user.score + userScore });
     }
   }
 }

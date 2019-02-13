@@ -37,14 +37,10 @@ class Battle {
     Task.draw();
     Battle.addTaskButtons();
 
-    Score.addToScore('ton9q', 10);
-    Score.addToScore('bot', 1);
-    Score.addToScore('maksim', 5);
-
     // onclick end button
     $('.end-button').click(function() {
       if (ModalDialog.getCountNumberMonsters() !== 0) {
-        Score.addToScore($('#hero-name').text(), ModalDialog.getCountNumberMonsters());
+        Score.addUser($('#hero-name').text(), ModalDialog.getCountNumberMonsters());
       }
 
       $('.battle').hide();

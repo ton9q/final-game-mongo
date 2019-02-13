@@ -3,6 +3,8 @@ import $ from 'jquery';
 import template from './menu.template';
 import './menu.css';
 
+import Score from '../../game/score';
+
 class Menu {
   static draw() {
 
@@ -19,6 +21,8 @@ class Menu {
 
     // score
     $('.menu__item.score').click(function() {
+      Score.update();
+      
       $('.menu__container').hide();
       $('.menu__score_section').fadeIn(1000);
     });
