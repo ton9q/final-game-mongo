@@ -361,3 +361,5 @@ class Hero {
 }
 
 export default Hero;
+
+// ^_^
