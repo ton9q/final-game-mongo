@@ -4,17 +4,13 @@ import { pause } from '../utils/index';
 
 import CONFIG_LIST from '../utils/loadImages';
 
+const defaultHealth = 100;
+const defaultDamage = 25;
+
 class Monster {
   constructor(game, health, damage) {
-    if (typeof health  === 'undefined') {
-      health = 100;
-    }
-    if (typeof damage  === 'undefined') {
-      damage = 25;
-    }
-
-    this.health = health;
-    this.damage = damage;
+    this.health = health || defaultHealth;
+    this.damage = damage || defaultDamage;
 
     this.canvas = document.getElementById('canvas-monster');
     this.ctx = this.canvas.getContext('2d');
@@ -30,22 +26,15 @@ class Monster {
   }
 
   newMonster(health, damage) {
-    if (typeof health  === 'undefined') {
-      health = 100;
-    }
-    if (typeof damage  === 'undefined') {
-      damage = 25;
-    }
-
     this.monsterNumber = Math.floor(Math.random() * CONFIG_LIST.sprites.monsters.length);
     this.animationType = 'stand';
     this.currentLoopIndex = 0;
     this.frameCount = 0;
-    this.health = health;
-    this.damage = damage;
-    
+    this.health = health || defaultHealth;
+    this.damage = damage || defaultDamage;
+
     $('#canvas-monster').css({
-      right: '0%'
+      right: '0%',
     });
   }
 
@@ -71,6 +60,7 @@ class Monster {
         break;
       default:
         console.log('nothing animation'); // eslint-disable-line
+        break;
     }
   }
 
@@ -90,10 +80,10 @@ class Monster {
       canvasX,
       canvasY - 32,
       scaledWidth,
-      scaledHeight
+      scaledHeight,
     );
   }
-  
+
   standAnimation() {
     const cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
     this.frameCount += 1;
@@ -120,7 +110,7 @@ class Monster {
 
     $('#canvas-monster').animate(
       {
-        right: 58 + '%',
+        right: `${58}%`,
       },
       1500,
       async () => {
@@ -132,7 +122,7 @@ class Monster {
         } else {
           this.game.hero.animationType = 'hurt';
         }
-      }
+      },
     );
 
     await pause(2000);
@@ -140,12 +130,12 @@ class Monster {
 
     $('#canvas-monster').animate(
       {
-        right: 0 + '%',
+        right: `${0}%`,
       },
       1500,
       () => {
         this.animationType = 'stand';
-      }
+      },
     );
 
     if (this.game.hero.health <= 0) {
@@ -153,12 +143,12 @@ class Monster {
 
       $('#canvas-monster ').animate(
         {
-          right: 30 + '%',
+          right: `${30}%`,
         },
         750,
         () => {
           this.animationType = 'jump';
-        }
+        },
       );
     }
   }

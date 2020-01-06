@@ -9,7 +9,7 @@ class Header {
     $('.start-page').hide();
 
     // show menu on click
-    $('.start-page').click(function() {
+    $('.start-page').click(() => {
       $('.start-page').hide();
       $('.menu').fadeIn(1000);
     });

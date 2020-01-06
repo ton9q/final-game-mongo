@@ -1,9 +1,9 @@
-import capitals from '../../data/capitals';
+import capitals from '../../data/capitals.json';
 
 class CapitalsTask {
   constructor() {
-    this.question;
-    this.result;
+    this.question = '';
+    this.result = '';
   }
 
   init() {

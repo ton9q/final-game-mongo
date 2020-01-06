@@ -19,7 +19,7 @@ export default `
     <p>
       MY GAME is a fighting game in which you must fight with computer using your very own 
       deadly warrior and your awesome brain. Before you enter the arena you can choose 
-      location, customise the appearance of your warrior and give it a name.
+      location, customize the appearance of your warrior and give it a name.
     </p>
     <p>
       Once you have created your warrior you can start fighting! Push button attack and 

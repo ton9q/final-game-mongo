@@ -1,30 +1,29 @@
 let slideIndex = 0;
 
-function showSlides(n) {
-  let i;
-  let x = document.getElementsByClassName('slide');
+function showSlides(nextSlideIndex) {
+  const slides = document.getElementsByClassName('slide');
+  const slideIndexForShow = nextSlideIndex !== 0 || nextSlideIndex > slides.length
+    ? slides.length - 1
+    : 0;
 
-  if (n > x.length) {
-	slideIndex = x.length;
-  } else if (n < 1) {
-	slideIndex = 1;
+  for (let i = 0; i < slides.length; i += 1) {
+    slides[i].style.display = 'none';
   }
-  
-  for (i = 0; i < x.length; i++) {
-	x[i].style.display = 'none';
-  }
-  
-  x[slideIndex - 1].style.display = 'block';
-}
 
-function plusSlides(n) {
-  showSlides((slideIndex += n));
+  slides[slideIndexForShow].style.display = 'block';
 }
 
 const buttonPrev = document.getElementById('prev-button');
 const buttonNext = document.getElementById('next-button');
 
-buttonPrev.addEventListener('click', () => plusSlides(-1));
-buttonNext.addEventListener('click', () => plusSlides(1));
+buttonPrev.addEventListener('click', () => {
+  slideIndex -= 1;
+  showSlides(slideIndex);
+});
 
-plusSlides(slideIndex);
+buttonNext.addEventListener('click', () => {
+  slideIndex += 1;
+  showSlides(slideIndex);
+});
+
+showSlides(slideIndex);

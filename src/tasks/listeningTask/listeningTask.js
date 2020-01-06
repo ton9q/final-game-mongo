@@ -1,19 +1,20 @@
 import $ from 'jquery';
 
-import vocabulary from '../../data/vocabulary';
+import vocabulary from '../../data/vocabulary.json';
 
 class ListeningTask {
   constructor() {
     this.synth = window.speechSynthesis;
-    this.question;
-    this.result;
+    this.question = '';
+    this.result = '';
+    this.expression = 'Please write what you heard ';
   }
 
   init() {
     this.buttonCustom();
 
     const vocabularyArray = Object.keys(vocabulary);
-    let question = vocabularyArray[Math.floor(Math.random() * vocabularyArray.length)];
+    const question = vocabularyArray[Math.floor(Math.random() * vocabularyArray.length)];
     this.question = question;
     this.result = question;
   }
@@ -39,23 +40,15 @@ class ListeningTask {
     });
 
     buttonHeard.hover(
-      function() {
-        $(this).css({
-          color: 'rgba(0, 0, 0, 0.4)',
-        });
-      },
-      function() {
-        $(this).css({
-          color: 'rgb(0, 0, 0)',
-        });
-      }
+      () => { $(this).css({ color: 'rgba(0, 0, 0, 0.4)' }); },
+      () => { $(this).css({ color: 'rgb(0, 0, 0)' }); },
     );
   }
 
   templateQuestion() {
     const template = `
       <div class="expression">
-        <span>Please write what you heard </span>
+        <span>${this.expression}</span>
         <button id="heard-question">
           <i class="fas fa-play-circle fa-2x"></i>
         </button>

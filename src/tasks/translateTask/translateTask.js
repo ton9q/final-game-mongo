@@ -1,9 +1,9 @@
-import vocabulary from '../../data/vocabulary';
+import vocabulary from '../../data/vocabulary.json';
 
 class TranslateTask {
   constructor() {
-    this.question;
-    this.result;
+    this.question = '';
+    this.result = '';
   }
 
   init() {
@@ -16,7 +16,7 @@ class TranslateTask {
     this.question = question;
     this.result = vocabulary[question];
   }
- 
+
   templateQuestion() {
     const template = `
       <div class="expression">

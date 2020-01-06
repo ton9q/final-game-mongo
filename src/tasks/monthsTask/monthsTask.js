@@ -1,9 +1,9 @@
-import months from '../../data/months';
+import months from '../../data/months.json';
 
-class monthsTask {
+class MonthsTask {
   constructor() {
-    this.question;
-    this.result;
+    this.question = '';
+    this.result = '';
   }
 
   init() {
@@ -28,4 +28,4 @@ class monthsTask {
   }
 }
 
-export default new monthsTask();
+export default new MonthsTask();

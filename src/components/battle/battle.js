@@ -7,7 +7,7 @@ import ModalDialog from '../modalDialog/modalDialog';
 import TaskButton from '../taskButton/taskButton';
 import Task from '../task/task';
 
-import monsterNames from '../../data/monsterNames';
+import monsterNames from '../../data/monsterNames.json';
 import generateName from '../../game/generateName';
 import Game from '../../game/game';
 import Score from '../../game/score';
@@ -19,7 +19,7 @@ import compareNumbersTask from '../../tasks/compareNumbersTask/compareNumbersTas
 import flagsTask from '../../tasks/flagsTask/flagsTask';
 import listeningTask from '../../tasks/listeningTask/listeningTask';
 import mathTask from '../../tasks/mathTask/mathTask';
-import monthsTask from '../../tasks/monthsTask/monthsTask';
+import MonthsTask from '../../tasks/monthsTask/monthsTask';
 import translateTask from '../../tasks/translateTask/translateTask';
 
 let run = false;
@@ -38,7 +38,7 @@ class Battle {
     Battle.addTaskButtons();
 
     // onclick end button
-    $('.end-button').click(function() {
+    $('.end-button').click(() => {
       if (ModalDialog.getCountNumberMonsters() !== 0) {
         Score.addUser($('#hero-name').text(), ModalDialog.getCountNumberMonsters());
       }
@@ -59,7 +59,7 @@ class Battle {
     });
 
     // onclick next button - new monster
-    $('.next-button').click(function() {
+    $('.next-button').click(() => {
       game.monster.newMonster();
       game.hero.newHero();
 
@@ -80,7 +80,7 @@ class Battle {
       game.animate();
 
       // onclick choice-spell button
-      $('.battle .button-choice-spell').click(function() {
+      $('.battle .button-choice-spell').click(() => {
         ModalDialog.open();
       });
     }
@@ -90,7 +90,7 @@ class Battle {
       'background-image': `${$('.background-container').css('background-image')}`,
     });
 
-    // change controll panel (names)
+    // change control panel (names)
     $('#hero-name').text(`${$('#person-name').val()}`);
     $('#monster-name').text(generateName(monsterNames));
 
@@ -99,12 +99,9 @@ class Battle {
     game.monster.newMonster();
   }
 
-  static changeHp(classForChange, changeValueInPersents) {
-    if (typeof changeValueInPersents === 'undefined') {
-      changeValueInPersents = 25;
-    }
-
-    const collors = {
+  static changeHp(classForChange, changeValueInPercents) {
+    const defaultChangeValueInPercents = 25;
+    const colors = {
       0: 'rgb(0,0,0)',
       25: 'rgb(255, 0, 0)',
       50: 'rgb(255, 136, 0)',
@@ -112,13 +109,14 @@ class Battle {
       100: 'rgba(255, 255, 255, 0.5)',
     };
 
-    const currentHpInPersents = Math.round(
-      parseInt($(`.battle__panel .${classForChange}`).css('width')) / 2.5
+    const currentHpInPercents = Math.round(
+      parseInt($(`.battle__panel .${classForChange}`).css('width'), 10) / 2.5,
     );
 
+    const changeValue = changeValueInPercents || defaultChangeValueInPercents;
     $(`.battle__panel .${classForChange}`).css({
-      width: `${currentHpInPersents - changeValueInPersents}%`,
-      'background-color': `${collors[currentHpInPersents - changeValueInPersents]}`,
+      width: `${currentHpInPercents - changeValue}%`,
+      'background-color': `${colors[currentHpInPercents - changeValue]}`,
     });
   }
 
@@ -135,11 +133,11 @@ class Battle {
 
     await pause(2000); // pause - because we wait animation finish (hp)
 
-    if (parseInt($('.battle__panel .hero-hp').css('width')) === 0) {
+    if (parseInt($('.battle__panel .hero-hp').css('width'), 10) === 0) {
       death = true;
       ModalDialog.getCountNumberMonsters();
       $('.modal-body .end-game .next-button').hide();
-    } else if (parseInt($('.battle__panel .monster-hp').css('width')) === 0) {
+    } else if (parseInt($('.battle__panel .monster-hp').css('width'), 10) === 0) {
       death = true;
       ModalDialog.addToCountNumberMonsters();
       $('.modal-body .end-game .next-button').show();
@@ -166,16 +164,14 @@ class Battle {
 
   static checkResult(answer) {
     let result = false;
-    answer = answer.toLowerCase();
+    const normalizedAnswer = answer.toLowerCase().trim();
 
     if (Array.isArray(trueResult)) {
       trueResult.forEach(item => {
-        item = item.toLowerCase();
-        if (answer == item) result = true;
+        const normalizedItem = item.toLowerCase().trim();
+        if (normalizedAnswer === normalizedItem) result = true;
       });
-    } else {
-      if (answer == trueResult) result = true;
-    }
+    } else if (answer === trueResult) result = true;
 
     return result;
   }
@@ -190,7 +186,7 @@ class Battle {
     TaskButton.draw('Flags');
 
     // onclick Math task
-    $('.task-button.Math').click(function() {
+    $('.task-button.Math').click(() => {
       Battle.onOpenTask();
 
       mathTask.init();
@@ -199,7 +195,7 @@ class Battle {
     });
 
     // onclick Capitals task
-    $('.task-button.Capitals').click(function() {
+    $('.task-button.Capitals').click(() => {
       Battle.onOpenTask();
 
       capitalsTask.init();
@@ -208,7 +204,7 @@ class Battle {
     });
 
     // onclick Translation task
-    $('.task-button.Translation').click(function() {
+    $('.task-button.Translation').click(() => {
       Battle.onOpenTask();
 
       translateTask.init();
@@ -217,7 +213,7 @@ class Battle {
     });
 
     // onclick Listening task
-    $('.task-button.Listening').click(function() {
+    $('.task-button.Listening').click(() => {
       $('.modal-body .tasks').hide();
       $('.modal-body .in-task').fadeIn(1000);
 
@@ -229,16 +225,16 @@ class Battle {
     });
 
     // onclick Months task
-    $('.task-button.Months').click(function() {
+    $('.task-button.Months').click(() => {
       Battle.onOpenTask();
 
-      monthsTask.init();
-      $('.in-task .content-question').append(monthsTask.templateQuestion());
-      trueResult = monthsTask.result;
+      MonthsTask.init();
+      $('.in-task .content-question').append(MonthsTask.templateQuestion());
+      trueResult = MonthsTask.result;
     });
 
     // onclick Compare-numbers task
-    $('.task-button.Compare-numbers').click(function() {
+    $('.task-button.Compare-numbers').click(() => {
       Battle.onOpenTask();
 
       compareNumbersTask.init();
@@ -247,7 +243,7 @@ class Battle {
     });
 
     // onclick Flags task
-    $('.task-button.Flags').click(function() {
+    $('.task-button.Flags').click(() => {
       Battle.onOpenTask();
 
       flagsTask.init();
@@ -256,7 +252,7 @@ class Battle {
     });
 
     // onclick answer button
-    $('.answer-button').click(function() {
+    $('.answer-button').click(() => {
       const result = Battle.checkResult($('input#answer').val());
 
       Task.clearInputAnswer();

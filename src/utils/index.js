@@ -1,11 +1,10 @@
 import $ from 'jquery';
 
-const pause = time =>
-  new Promise(resolve => {
-    setTimeout(() => {
-      resolve();
-    }, time);
-  });
+const pause = time => new Promise(resolve => {
+  setTimeout(() => {
+    resolve();
+  }, time);
+});
 
 const spaceToDashInString = string => string.split(' ').join('-');
 
@@ -29,14 +28,14 @@ function sound(src) {
 
   this.checkMusicPlay = true;
 
-  this.play = function() {
+  this.play = () => {
     this.sound.play();
     $('.sound-switcher .on').toggleClass('none');
     $('.sound-switcher .off').toggleClass('none');
     this.checkMusicPlay = true;
   };
 
-  this.stop = function() {
+  this.stop = () => {
     this.sound.pause();
     $('.sound-switcher .on').toggleClass('none');
     $('.sound-switcher .off').toggleClass('none');
@@ -51,4 +50,9 @@ function sound(src) {
   `;
 }
 
-export { pause, spaceToDashInString, addFavicon, sound };
+export {
+  pause,
+  spaceToDashInString,
+  addFavicon,
+  sound,
+};

@@ -4,17 +4,13 @@ import { pause } from '../utils/index';
 
 import CONFIG_LIST from '../utils/loadImages';
 
+const defaultHealth = 100;
+const defaultDamage = 25;
+
 class Hero {
   constructor(game, health, damage) {
-    if (typeof health  === 'undefined') {
-      health = 100;
-    }
-    if (typeof damage  === 'undefined') {
-      damage = 25;
-    }
-
-    this.health = health;
-    this.damage = damage;
+    this.health = health || defaultHealth;
+    this.damage = damage || defaultDamage;
 
     this.canvas = document.getElementById('canvas-hero');
     this.ctx = this.canvas.getContext('2d');
@@ -30,22 +26,15 @@ class Hero {
   }
 
   newHero(health, damage) {
-    if (typeof health  === 'undefined') {
-      health = 100;
-    }
-    if (typeof damage  === 'undefined') {
-      damage = 25;
-    }
-
     this.heroNumber = Number($('#person-container').attr('data-battle'));
     this.animationType = 'stand';
     this.currentLoopIndex = 0;
     this.frameCount = 0;
-    this.health = health;
-    this.damage = damage;
-    
+    this.health = health || defaultHealth;
+    this.damage = damage || defaultDamage;
+
     $('#canvas-hero').css({
-      left: '5%'
+      left: '5%',
     });
   }
 
@@ -71,6 +60,7 @@ class Hero {
         break;
       default:
         console.log('nothing animation'); // eslint-disable-line
+        break;
     }
   }
 
@@ -189,7 +179,7 @@ class Hero {
       canvasX,
       canvasY,
       scaledWidth,
-      scaledHeight
+      scaledHeight,
     );
   }
 
@@ -219,7 +209,7 @@ class Hero {
 
     $('#canvas-hero').animate(
       {
-        left: 64 + '%',
+        left: `${64}%`,
       },
       1500,
       async () => {
@@ -231,7 +221,7 @@ class Hero {
         } else {
           this.game.monster.animationType = 'hurt';
         }
-      }
+      },
     );
 
     await pause(2000);
@@ -239,12 +229,12 @@ class Hero {
 
     $('#canvas-hero').animate(
       {
-        left: 5 + '%',
+        left: `${5}%`,
       },
       1500,
       () => {
         this.animationType = 'stand';
-      }
+      },
     );
 
     if (this.game.monster.health <= 0) {
@@ -252,12 +242,12 @@ class Hero {
 
       $('#canvas-hero').animate(
         {
-          left: 30 + '%',
+          left: `${30}%`,
         },
         750,
         () => {
           this.animationType = 'jump';
-        }
+        },
       );
     }
   }

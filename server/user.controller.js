@@ -55,7 +55,7 @@ exports.updateUser = (req, res) => {
     }
 
     res.json({
-      message: 'User successufuly update',
+      message: 'User successfully update',
     });
   });
 };

@@ -1,5 +1,5 @@
 const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -50,9 +50,27 @@ module.exports = {
   },
 
   plugins: [
-    new HtmlWebPackPlugin({
-      template: './src/index.html',
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      favicon: 'assets/icon.ico',
+      title: 'Game',
+      minify: {
+        html5: true,
+        collapseWhitespace: true,
+        minifyCSS: true,
+        minifyJS: true,
+        minifyURLs: false,
+        removeAttributeQuotes: true,
+        removeComments: true,
+        removeEmptyAttributes: true,
+        removeOptionalTags: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributese: true,
+        useShortDoctype: true,
+      },
     }),
+
     new CopyWebpackPlugin([
       {
         from: 'sounds',
@@ -62,10 +80,22 @@ module.exports = {
     ]),
   ],
 
+  resolve: {
+    extensions: [
+      '.js',
+      '.css',
+      '.html',
+    ],
+  },
+
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 1902,
     historyApiFallback: true,
+    watchContentBase: true,
+    compress: true,
+    inline: true,
+    open: true,
+    port: 1902,
+    hot: true,
   },
 };

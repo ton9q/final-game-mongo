@@ -13,27 +13,27 @@ class Score {
   }
 
   static async update() {
-    $(`.menu__score_container`).empty();
+    $('.menu__score_container').empty();
 
     const users = await getUsers();
     const usersTemplates = [];
 
     users.map(user => usersTemplates.push(Score.scoreItem(user.name, user.score)));
 
-    usersTemplates.map(user => $(`.menu__score_container`).append(user));
+    usersTemplates.map(user => $('.menu__score_container').append(user));
   }
 
   static async addUser(name, score) {
     const users = await getUsers();
     let newUser = true;
 
-    users.map(user => {
+    users.forEach(user => {
       if (user.name === name) newUser = false;
     });
 
     const user = {
-      name: name,
-      score: score
+      name,
+      score,
     };
 
     if (newUser) {
@@ -41,8 +41,8 @@ class Score {
     } else {
       let userScore = 0;
 
-      users.map(user => {
-        if (user.name === name) userScore = user.score;
+      users.forEach(currentUser => {
+        if (currentUser.name === name) userScore = currentUser.score;
       });
 
       await updateUser({ ...user, score: user.score + userScore });

@@ -4,11 +4,7 @@ import './task.css';
 import template from './task.template';
 
 class Task {
-  static draw(taskName) {
-    if (typeof taskName === 'undefined') {
-      taskName = 'taskName';
-    }
-
+  static draw() {
     $('.modal-body .in-task').append(template);
   }
 

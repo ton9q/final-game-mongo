@@ -15,7 +15,7 @@ class Config {
     Config.drawContainers();
 
     // start battle
-    $('.config .start-button').click(function() {
+    $('.config .start-button').click(() => {
       const personName = $('#person-name').val();
 
       // check name for input
@@ -32,21 +32,23 @@ class Config {
   }
 
   static drawContainers() {
-    for (let i = 0; i < CONFIG_LIST.backgrounds.length; i++) {
+    for (let i = 0; i < CONFIG_LIST.backgrounds.length; i += 1) {
       Config.createAndAppendTemplateConfigItem('background', i);
       Config.changeCssConfigItem('background', 'backgrounds', i);
     }
 
-    for (let i = 0; i < CONFIG_LIST.heroes.length; i++) {
+    for (let i = 0; i < CONFIG_LIST.heroes.length; i += 1) {
       Config.createAndAppendTemplateConfigItem('person', i);
       Config.changeCssConfigItem('person', 'heroes', i);
     }
 
-    $('.backgrounds .config-item').click(function() {
+    // eslint-disable-next-line func-names
+    $('.backgrounds .config-item').click(function () {
       Config.changeCssOnClickConfigItem('background', this);
     });
 
-    $('.persons .config-item').click(function() {
+    // eslint-disable-next-line func-names
+    $('.persons .config-item').click(function () {
       Config.changeCssOnClickConfigItem('person', this);
     });
 
@@ -70,8 +72,8 @@ class Config {
   }
 
   static createAndAppendTemplateConfigItem(configItem, index) {
-    const template = `<div class="config-item ${configItem}-${index}" id="${configItem}-${index}"></div>`;
-    $(`#${configItem}-wrapper-container`).append(template);
+    const configTemplate = `<div class="config-item ${configItem}-${index}" id="${configItem}-${index}"></div>`;
+    $(`#${configItem}-wrapper-container`).append(configTemplate);
   }
 
   static changeCssOnClickConfigItem(configItem, thisConfigItem) {
@@ -92,7 +94,7 @@ class Config {
 
     const idThisConfigItem = $(thisConfigItem).attr('id').split('-')[1];
 
-    $(`.${configItem}-container`).attr('data-battle', idThisConfigItem)
+    $(`.${configItem}-container`).attr('data-battle', idThisConfigItem);
   }
 
   static addDefaultPreviewConfigItems() {

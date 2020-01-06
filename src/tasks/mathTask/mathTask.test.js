@@ -5,6 +5,6 @@ describe('mathTask', () => {
   it('should add to dom mathTask with numbers', () => {
     mathTask.init();
     $('body').html(mathTask.templateQuestion());
-    expect($('.expresion span')).not.toBeNull();
+    expect($('.expression span')).not.toBeNull();
   });
 });

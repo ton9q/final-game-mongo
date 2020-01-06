@@ -1,7 +1,7 @@
 class CompareNumbersTask {
   constructor() {
-    this.question;
-    this.result;
+    this.question = '';
+    this.result = '';
   }
 
   init() {
@@ -22,7 +22,7 @@ class CompareNumbersTask {
   templateQuestion() {
     const template = `
       <div class="expression">
-        <p>Compare the numbers and enter required comparision operator:<br>
+        <p>Compare the numbers and enter required comparison operator:<br>
           <span>${this.question}</span>
         </p>
       </div>

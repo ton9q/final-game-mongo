@@ -2,8 +2,8 @@ import flags from '../../data/flags';
 
 class FlagsTask {
   constructor() {
-    this.question;
-    this.result;
+    this.question = '';
+    this.result = '';
   }
 
   init() {

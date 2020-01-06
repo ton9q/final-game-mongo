@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -10,15 +11,14 @@ const app = express();
 // Set up mongoose connection
 const admin = {
   name: 'admin',
-  password: 'admin1'
+  password: 'admin1',
 };
-const devDBUrl =
-  process.env.MONGODB_URI ||
-  `mongodb://${admin.name}:${admin.password}@ds052978.mlab.com:52978/rss-game`;
+const devDBUrl = process.env.MONGODB_URI
+  || `mongodb://${admin.name}:${admin.password}@ds052978.mlab.com:52978/rss-game`;
 
 mongoose
   .connect(devDBUrl)
-  .then(() => console.log('Successfuly connected to database'))
+  .then(() => console.log('Successfully connected to database'))
   .catch(err => console.error(err));
 // mongoose.Promise = global.Promise;
 const db = mongoose.connection;

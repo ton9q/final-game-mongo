@@ -5,7 +5,7 @@ class Game {
   constructor(health, damage) {
     this.hero = new Hero(this, health, damage);
     this.monster = new Monster(this, health, damage);
-    this.animation;
+    this.animation = null;
   }
 
   draw() {

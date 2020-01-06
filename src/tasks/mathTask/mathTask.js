@@ -1,9 +1,9 @@
 class MathTask {
   constructor() {
-    this.firstNumber;
-    this.secondNumber;
-    this.result;
-    this.expression;
+    this.firstNumber = null;
+    this.secondNumber = null;
+    this.result = '';
+    this.expression = '';
 
     this.operations = ['+', '-', '*', '/'];
   }
@@ -40,6 +40,8 @@ class MathTask {
         this.firstNumber = Math.floor(Math.random() * 100) + 1;
         this.secondNumber = Math.floor(Math.random() * 10) + 1;
         this.result = this.firstNumber * this.secondNumber;
+        break;
+      default:
         break;
     }
 

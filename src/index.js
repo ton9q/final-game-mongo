@@ -22,7 +22,7 @@ const starterTemplate = `
   <div class="starter-template" id="content"></div>
 </main>`;
 
-$(document).ready(function() {
+$(document).ready(() => {
   window.$ = $; // for debug
 
   addFavicon(icon);
@@ -32,7 +32,7 @@ $(document).ready(function() {
   const sound = new Sound('./sounds/default.mp3');
   $('body').append(sound.templateButton);
 
-  $('.sound-switcher').click(function() {
+  $('.sound-switcher').click(() => {
     if (sound.checkMusicPlay) {
       sound.stop();
     } else {
