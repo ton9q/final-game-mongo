@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 const getUsers = () => fetch('/users/getUsers', {
   method: 'GET',
   headers: {
@@ -7,7 +9,7 @@ const getUsers = () => fetch('/users/getUsers', {
 })
   .then(res => res.json())
   .catch(err => {
-      console.log(err); // eslint-disable-line
+    console.log(err);
   });
 
 const addUser = user => fetch('/users/addUser', {
@@ -18,11 +20,9 @@ const addUser = user => fetch('/users/addUser', {
   },
   body: JSON.stringify(user),
 })
-  .then(res => {
-    res.json();
-  })
+  .then(res => res.json())
   .catch(err => {
-      console.log(err); // eslint-disable-line
+    console.log(err);
   });
 
 const updateUser = user => fetch('/users/updateUser', {
@@ -33,11 +33,13 @@ const updateUser = user => fetch('/users/updateUser', {
   },
   body: JSON.stringify(user),
 })
-  .then(res => {
-    res.json();
-  })
+  .then(res => res.json())
   .catch(err => {
-      console.log(err); // eslint-disable-line
+    console.log(err);
   });
 
-export { getUsers, addUser, updateUser };
+export {
+  getUsers,
+  addUser,
+  updateUser,
+};

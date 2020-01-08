@@ -64,10 +64,13 @@ class Hero {
     }
   }
 
-  drawFrame(frameX, frameY, canvasX, canvasY) {
+  // drawFrame(frameX, frameY, canvasX, canvasY) {
+  drawFrame(frameX, frameY) {
     const scale = 2;
     let width;
     let height;
+    let canvasX = 0;
+    let canvasY = 0;
 
     if (this.heroNumber === 0) {
       if (this.animationType === 'stand') {

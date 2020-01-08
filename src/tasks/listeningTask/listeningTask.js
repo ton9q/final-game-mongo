@@ -22,7 +22,7 @@ class ListeningTask {
   speakQuestion() {
     const speech = new SpeechSynthesisUtterance(this.question);
     const voices = this.synth.getVoices();
-    speech.voice = voices[4];
+    speech.voice = voices[4]; // eslint-disable-line
     this.synth.speak(speech);
   }
 

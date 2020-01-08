@@ -3,11 +3,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
   entry: './src/index.js',
   output: {
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    // path: path.resolve(__dirname, 'dist'),
   },
 
   module: {
@@ -90,7 +89,6 @@ module.exports = {
 
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    historyApiFallback: true,
     watchContentBase: true,
     compress: true,
     inline: true,
