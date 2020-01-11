@@ -33,7 +33,8 @@ class ModalDialog {
   }
 
   static close() {
-    $('#modal-dialog').animate({ opacity: 0, top: '45%' }, () => {
+    // eslint-disable-next-line func-names
+    $('#modal-dialog').animate({ opacity: 0, top: '45%' }, function () {
       $(this).css('display', 'none');
       $('#modal-dialog-overlay').fadeOut(400);
     });

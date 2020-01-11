@@ -61,16 +61,16 @@
 
 #canvas-hero {
   position: absolute;
-  bottom: 5%;
+  bottom: 7%;
   left: 5%;
   /* border: 1px solid white; */
-  width: 300px;
+  width: 500px;
   height: 300px;
 }
 
 #canvas-monster {
   position: absolute;
-  bottom: 2%;
+  bottom: 5%;
   right: 0%;
   /* border: 1px solid white; */
   width: 450px;

@@ -14,6 +14,8 @@ import Score from '../../game/score';
 
 import { pause } from '../../utils';
 
+import { DEFAULT_HEALTH, DEFAULT_DAMAGE } from '../../constants/defaultEntityData';
+
 import capitalsTask from '../../tasks/capitalsTask/capitalsTask';
 import compareNumbersTask from '../../tasks/compareNumbersTask/compareNumbersTask';
 import flagsTask from '../../tasks/flagsTask/flagsTask';
@@ -25,9 +27,6 @@ import translateTask from '../../tasks/translateTask/translateTask';
 let run = false;
 let game;
 let trueResult;
-
-const health = 100;
-const damage = 25;
 
 class Battle {
   static draw() {
@@ -76,7 +75,7 @@ class Battle {
   static init() {
     if (!run) {
       run = true;
-      game = new Game(health, damage);
+      game = new Game(DEFAULT_HEALTH, DEFAULT_DAMAGE);
       game.animate();
 
       // onclick choice-spell button
@@ -167,11 +166,16 @@ class Battle {
     const normalizedAnswer = answer.toLowerCase().trim();
 
     if (Array.isArray(trueResult)) {
-      trueResult.forEach(item => {
-        const normalizedItem = item.toLowerCase().trim();
-        if (normalizedAnswer === normalizedItem) result = true;
-      });
-    } else if (answer === trueResult) result = true;
+      for (let i = 0; i < trueResult.length; i += 1) {
+        const normalizedItem = trueResult[i].toString().toLowerCase().trim();
+        if (normalizedAnswer === normalizedItem) {
+          result = true;
+          break;
+        }
+      }
+    } else if (normalizedAnswer === trueResult.toString()) {
+      result = true;
+    }
 
     return result;
   }
@@ -263,10 +267,10 @@ class Battle {
 
       if (result) {
         game.hero.attack();
-        Battle.changeHp('monster-hp', damage);
+        Battle.changeHp('monster-hp', DEFAULT_DAMAGE);
       } else {
         game.monster.attack();
-        Battle.changeHp('hero-hp', damage);
+        Battle.changeHp('hero-hp', DEFAULT_DAMAGE);
       }
 
       Battle.checkDeath();

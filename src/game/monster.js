@@ -1,24 +1,25 @@
 import $ from 'jquery';
 
 import { pause } from '../utils/index';
-
 import CONFIG_LIST from '../utils/loadImages';
+import resizeCanvas from '../utils/resizeCanvas';
 
-const defaultHealth = 100;
-const defaultDamage = 25;
+import { DEFAULT_HEALTH, DEFAULT_DAMAGE } from '../constants/defaultEntityData';
 
 class Monster {
   constructor(game, health, damage) {
-    this.health = health || defaultHealth;
-    this.damage = damage || defaultDamage;
+    this.health = health || DEFAULT_HEALTH;
+    this.damage = damage || DEFAULT_DAMAGE;
 
     this.canvas = document.getElementById('canvas-monster');
     this.ctx = this.canvas.getContext('2d');
+    resizeCanvas(this.canvas, 4);
+
     this.game = game;
 
     this.sprite = new Image();
     this.monsterNumber = Math.floor(Math.random() * CONFIG_LIST.sprites.monsters.length);
-    this.delayFrame = 5;
+    this.delayFrame = 3;
 
     this.animationType = 'stand';
     this.currentLoopIndex = 0;
@@ -30,8 +31,8 @@ class Monster {
     this.animationType = 'stand';
     this.currentLoopIndex = 0;
     this.frameCount = 0;
-    this.health = health || defaultHealth;
-    this.damage = damage || defaultDamage;
+    this.health = health || DEFAULT_HEALTH;
+    this.damage = damage || DEFAULT_DAMAGE;
 
     $('#canvas-monster').css({
       right: '0%',
@@ -65,11 +66,8 @@ class Monster {
   }
 
   drawFrame(frameX, frameY, canvasX, canvasY) {
-    const scale = 3;
     const width = 900;
     const height = 900;
-    const scaledWidth = width / scale;
-    const scaledHeight = height / (scale + 1.5);
 
     this.ctx.drawImage(
       this.sprite,
@@ -78,16 +76,15 @@ class Monster {
       width,
       height,
       canvasX,
-      canvasY - 32,
-      scaledWidth,
-      scaledHeight,
+      canvasY - 200,
+      width,
+      height,
     );
   }
 
-  standAnimation() {
-    const cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+  animation(cycleLoop, spriteSrc, animationTypeAfter) {
     this.frameCount += 1;
-    this.sprite.src = CONFIG_LIST.sprites.monsters[this.monsterNumber].stand;
+    this.sprite.src = spriteSrc;
 
     if (this.frameCount < this.delayFrame) {
       return;
@@ -100,7 +97,56 @@ class Monster {
 
     if (this.currentLoopIndex >= cycleLoop.length) {
       this.currentLoopIndex = 0;
+
+      if (animationTypeAfter) {
+        this.animationType = animationTypeAfter;
+      }
     }
+  }
+
+  standAnimation() {
+    const cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+    const spriteSrc = CONFIG_LIST.sprites.monsters[this.monsterNumber].stand;
+
+    this.animation(cycleLoop, spriteSrc);
+  }
+
+
+  attackAnimation() {
+    const cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    const spriteSrc = CONFIG_LIST.sprites.monsters[this.monsterNumber].attack;
+
+    this.animation(cycleLoop, spriteSrc);
+  }
+
+  hurtAnimation() {
+    const cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    const spriteSrc = CONFIG_LIST.sprites.monsters[this.monsterNumber].hurt;
+    const animationTypeAfter = 'stand';
+
+    this.animation(cycleLoop, spriteSrc, animationTypeAfter);
+  }
+
+  dieAnimation() {
+    const cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+    const spriteSrc = CONFIG_LIST.sprites.monsters[this.monsterNumber].die;
+    const animationTypeAfter = 'nothing';
+
+    this.animation(cycleLoop, spriteSrc, animationTypeAfter);
+  }
+
+  runAnimation() {
+    const cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    const spriteSrc = CONFIG_LIST.sprites.monsters[this.monsterNumber].run;
+
+    this.animation(cycleLoop, spriteSrc);
+  }
+
+  jumpAnimation() {
+    const cycleLoop = [0, 1, 2, 3, 4, 5, 4, 3, 2, 1];
+    const spriteSrc = CONFIG_LIST.sprites.monsters[this.monsterNumber].jump;
+
+    this.animation(cycleLoop, spriteSrc);
   }
 
   async attack() {
@@ -110,7 +156,7 @@ class Monster {
 
     $('#canvas-monster').animate(
       {
-        right: `${58}%`,
+        right: `${70}%`,
       },
       1500,
       async () => {
@@ -150,103 +196,6 @@ class Monster {
           this.animationType = 'jump';
         },
       );
-    }
-  }
-
-  attackAnimation() {
-    const cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-    this.frameCount += 1;
-    this.sprite.src = CONFIG_LIST.sprites.monsters[this.monsterNumber].attack;
-
-    if (this.frameCount < this.delayFrame) {
-      return;
-    }
-
-    this.frameCount = 0;
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.drawFrame(cycleLoop[this.currentLoopIndex], 0, 0, 0);
-    this.currentLoopIndex += 1;
-
-    if (this.currentLoopIndex >= cycleLoop.length) {
-      this.currentLoopIndex = 0;
-    }
-  }
-
-  hurtAnimation() {
-    const cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-    this.frameCount += 1;
-    this.sprite.src = CONFIG_LIST.sprites.monsters[this.monsterNumber].hurt;
-
-    if (this.frameCount < this.delayFrame) {
-      return;
-    }
-
-    this.frameCount = 0;
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.drawFrame(cycleLoop[this.currentLoopIndex], 0, 0, 0);
-    this.currentLoopIndex += 1;
-
-    if (this.currentLoopIndex >= cycleLoop.length) {
-      this.currentLoopIndex = 0;
-      this.animationType = 'stand';
-    }
-  }
-
-  dieAnimation() {
-    const cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-    this.frameCount += 1;
-    this.sprite.src = CONFIG_LIST.sprites.monsters[this.monsterNumber].die;
-
-    if (this.frameCount < this.delayFrame) {
-      return;
-    }
-
-    this.frameCount = 0;
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.drawFrame(cycleLoop[this.currentLoopIndex], 0, 0, 0);
-    this.currentLoopIndex += 1;
-
-    if (this.currentLoopIndex >= cycleLoop.length) {
-      this.currentLoopIndex = 0;
-      this.animationType = 'nothing';
-    }
-  }
-
-  runAnimation() {
-    const cycleLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-    this.frameCount += 1;
-    this.sprite.src = CONFIG_LIST.sprites.monsters[this.monsterNumber].run;
-
-    if (this.frameCount < this.delayFrame) {
-      return;
-    }
-
-    this.frameCount = 0;
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.drawFrame(cycleLoop[this.currentLoopIndex], 0, 0, 0);
-    this.currentLoopIndex += 1;
-
-    if (this.currentLoopIndex >= cycleLoop.length) {
-      this.currentLoopIndex = 0;
-    }
-  }
-
-  jumpAnimation() {
-    const cycleLoop = [0, 1, 2, 3, 4, 5, 4, 3, 2, 1];
-    this.frameCount += 1;
-    this.sprite.src = CONFIG_LIST.sprites.monsters[this.monsterNumber].jump;
-
-    if (this.frameCount < this.delayFrame - 2) {
-      return;
-    }
-
-    this.frameCount = 0;
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.drawFrame(cycleLoop[this.currentLoopIndex], 0, 0, 0);
-    this.currentLoopIndex += 1;
-
-    if (this.currentLoopIndex >= cycleLoop.length) {
-      this.currentLoopIndex = 0;
     }
   }
 }

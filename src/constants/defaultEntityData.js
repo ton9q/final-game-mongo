@@ -1,0 +1,2 @@
+exports.DEFAULT_HEALTH = 100;
+exports.DEFAULT_DAMAGE = 25;

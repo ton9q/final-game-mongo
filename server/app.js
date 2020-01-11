@@ -12,7 +12,7 @@ const app = express();
 
 // Set up mongoose connection
 const devDBUrl = process.env.MONGODB_URL;
-console.log('devDBUrl', devDBUrl);
+
 mongoose
   .connect(devDBUrl)
   .then(() => console.log('Successfully connected to database'))
