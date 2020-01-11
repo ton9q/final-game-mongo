@@ -13,6 +13,10 @@ a {
   color: rgb(255, 255, 255);
 }
 
+.fullscreen_section {
+  height: 100vh;
+}
+
 
 /*** NAVIGATION ***/
 
@@ -77,19 +81,17 @@ header {
   text-align: center;
   position: relative;
   color: rgb(255, 255, 255);
-
   width: 100%;
-  height: 700px;
   overflow: hidden;
 }
 
 .header__image {
   width: 100%;
-  height: 700px;
+  height: 100vh;
   background-image: url("../img/header.jpg");
+  background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
-  /* background-position: 50% 50%; */
 }
 
 .header__text {
@@ -102,18 +104,19 @@ header {
 }
 
 .header__text h1 {
-  font-size: 60px;
+  font-size: 90px;
 }
+
 
 /*** MAIN ***/
 
+
 main section {
   max-width: 100%;
-  padding-bottom: 40px;
 }
 
 h2 {
-  font-size: 40px;
+  font-size: 60px;
 
   margin: 40px auto;
 }
@@ -127,7 +130,7 @@ h2 {
   align-content:center;
 
   max-width: 70%;
-  height: 500px;
+  min-height: 100%;
 
   margin: auto;
   padding-top: 50px;
@@ -135,7 +138,7 @@ h2 {
 }
 
 .main__about_wrapper p {
-  font-size: 20px;
+  font-size: 30px;
   letter-spacing: 0.1rem;
   line-height: 1.6;
 
@@ -151,8 +154,9 @@ h2 {
   justify-content: space-between;
   align-items:center;
 
-  max-width: 70%;
-  height: 550px;
+  max-width: 90%;
+  height: 70vh;
+  padding-top: 70px;
 
   margin: auto;
   text-align: center;
@@ -161,11 +165,12 @@ h2 {
 .main__screenshots_slider {
   display: flex;
   align-items:center;
+  justify-content: center;
 }
 
 .main__screenshots_wrapper img.slide {
-  width: 600px;
-  height: 400px;
+  width: 70%;
+  height: 600px;
   
   animation: fade 1.5s;
 }
@@ -267,6 +272,14 @@ h2 {
 
 /* MAIN_CONTACTS */
 
+.main__contacts {
+  flex: 1 0 auto;
+
+  display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+
 .main__contacts_wrapper {
   display: flex;
   flex-direction: column;
@@ -282,7 +295,7 @@ h2 {
 
 .main__contacts_wrapper span,
 .main__contacts_wrapper p {
-  font-size: 20px;
+  font-size: 30px;
   letter-spacing: 0.1rem;
   line-height: 1.6;
 }
@@ -297,7 +310,7 @@ h2 {
 
 .main__contacts_link a {
   padding: 10px;
-  padding-top: 22px;
+  padding-top: 35px;
   padding-left: 12px;
 
   color: rgb(0, 0, 0);
@@ -314,12 +327,12 @@ h2 {
   cursor: pointer;
 }
 
-
 /*** FOOTER ***/
 
-
-footer {
+.footer {
   text-align: center;
+  flex: 0 0 auto;
+
   padding: 35px;
   max-width: 100%;
 
@@ -327,18 +340,18 @@ footer {
   color: rgb(255, 255, 255);
 }
 
-footer span {
+.footer span {
   font-size: 18px;
 }
 
-footer a {
+.footer a {
   position: relative;
   color: rgb(255, 255, 255);
   text-decoration: none;
   font-size: 20px;
 }
 
-footer a:before {
+.footer a:before {
   content: "";
   position: absolute;
   width: 100%;
@@ -351,7 +364,7 @@ footer a:before {
   transition: all 0.3s ease-in-out 0s;
 }
 
-footer a:hover:before {
+.footer a:hover:before {
   visibility: visible;
   transform: scaleX(1);
 }
