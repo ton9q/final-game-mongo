@@ -4,22 +4,20 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+require('dotenv').config();
+
 const user = require('./user.route'); // Imports routes for the users
 
 const app = express();
 
 // Set up mongoose connection
-const admin = {
-  name: 'admin',
-  password: 'admin1',
-};
-const devDBUrl = process.env.MONGODB_URI
-  || `mongodb://${admin.name}:${admin.password}@ds052978.mlab.com:52978/rss-game`;
-
+const devDBUrl = process.env.MONGODB_URL;
+console.log('devDBUrl', devDBUrl);
 mongoose
   .connect(devDBUrl)
   .then(() => console.log('Successfully connected to database'))
   .catch(err => console.error(err));
+
 // mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
